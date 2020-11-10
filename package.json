@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_module src/server.ts",
     "migrations": "yarn typeorm migration:run",
-    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "start": "yarn typeorm migration:run && tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "devDependencies": {
