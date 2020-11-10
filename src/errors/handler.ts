@@ -25,6 +25,8 @@ const deleteLastFile = () => {
 };
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
+  deleteLastFile();
+
   if (error instanceof ValidationError) {
     let errors: ValidationErrors = {};
 
@@ -32,14 +34,10 @@ const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
       errors[err.path] = err.errors;
     });
 
-    deleteLastFile();
-
     return res.status(400).json({ message: "Validation fails", errors });
   }
 
   console.error(error);
-
-  console.log("teset");
 
   return res.status(500).json({ message: "Internal Server Error" });
 };
