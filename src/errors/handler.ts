@@ -10,6 +10,9 @@ interface ValidationErrors {
 const deleteLastFile = () => {
   const files = fs.readdirSync(path.join(__dirname, "..", "..", "uploads", ""));
 
+  // Remove Readme from list
+  files.pop();
+
   fs.unlink(
     path.join(__dirname, "..", "..", "uploads", files[files.length - 1]),
     (err) => {
