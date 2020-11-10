@@ -5,6 +5,7 @@ import "./database/connection";
 import routes from "./routes";
 import path from "path";
 import errorHandler from "./errors/handler";
+import "dotenv";
 
 const app = express();
 
