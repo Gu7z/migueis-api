@@ -59,10 +59,10 @@ export default {
       abortEarly: false,
     });
 
-    const product = productsRepository.create();
+    const product = productsRepository.create(data);
 
-    await productsRepository.save(product).catch((error) => console.log(error));
+    await productsRepository.save(product);
 
-    return res.status(201).json(product);
+    return res.status(201).json(productView.render(product));
   },
 };
