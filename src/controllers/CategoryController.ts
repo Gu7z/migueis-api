@@ -1,14 +1,15 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Category from "../models/category";
+import categorysView from "../views/categorysView";
 import * as Yup from "yup";
 
 export default {
   async index(_req: Request, res: Response) {
     const categorysRepository = getRepository(Category);
-    const category = await categorysRepository.find();
+    const categorys = await categorysRepository.find();
 
-    return res.json(category);
+    return res.json(categorysView.renderMany(categorys));
   },
 
   async show(req: Request, res: Response) {
@@ -17,7 +18,7 @@ export default {
     const categorysRepository = getRepository(Category);
     const category = await categorysRepository.findOneOrFail(id);
 
-    return res.json(category);
+    return res.json(categorysView.render(category));
   },
 
   async create(req: Request, res: Response) {
@@ -41,7 +42,7 @@ export default {
 
     await categorysRepository.save(category);
 
-    return res.status(201).json(category);
+    return res.status(201).json(categorysView.render(category));
   },
 
   async update(req: Request, res: Response) {
@@ -68,7 +69,7 @@ export default {
 
     await categorysRepository.save(category);
 
-    return res.status(200).json(category);
+    return res.status(200).json(categorysView.render(category));
   },
 
   async delete(req: Request, res: Response) {
@@ -79,6 +80,6 @@ export default {
 
     await categorysRepository.remove(category);
 
-    return res.status(204).json();
+    return res.status(204);
   },
 };
