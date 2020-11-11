@@ -13,19 +13,25 @@ const deleteLastFile = () => {
   // Remove Readme from list
   files.pop();
 
-  fs.unlink(
-    path.join(__dirname, "..", "..", "uploads", files[files.length - 1]),
-    (err) => {
-      if (err) {
-        console.log(err);
-        return;
+  if (!!files[files.length - 1]) {
+    fs.unlink(
+      path.join(__dirname, "..", "..", "uploads", files[files.length - 1]),
+      (err) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
       }
-    }
-  );
+    );
+  }
 };
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
-  deleteLastFile();
+  try {
+    deleteLastFile();
+  } catch (error) {
+    console.log(error);
+  }
 
   if (error instanceof ValidationError) {
     let errors: ValidationErrors = {};
