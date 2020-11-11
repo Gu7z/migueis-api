@@ -31,6 +31,20 @@ export class createProducts1603769171736 implements MigrationInterface {
           name: "quantity",
           type: "integer",
         },
+        {
+          name: "category_id",
+          type: "integer",
+        },
+      ],
+      foreignKeys: [
+        {
+          name: "CategoryProduct",
+          columnNames: ["category_id"],
+          referencedTableName: "categorys",
+          referencedColumnNames: ["id"],
+          onUpdate: "CASCADE",
+          onDelete: "CASCADE",
+        },
       ],
     });
 
