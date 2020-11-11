@@ -9,6 +9,7 @@ export default {
       description: product.description,
       price: product.price,
       quantity: product.quantity,
+      category: product.category,
       images: imagesView.renderMany(product.images),
     };
   },
