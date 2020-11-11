@@ -164,6 +164,6 @@ export default {
 
     await productsRepository.remove(product);
 
-    return res.status(204).json();
+    return res.status(204);
   },
 };
