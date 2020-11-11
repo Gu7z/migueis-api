@@ -80,6 +80,6 @@ export default {
 
     await categorysRepository.remove(category);
 
-    return res.status(204);
+    return res.status(204).json();
   },
 };
