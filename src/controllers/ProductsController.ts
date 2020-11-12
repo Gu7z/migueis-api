@@ -5,6 +5,7 @@ import productView from "../views/productsView";
 import * as Yup from "yup";
 import Images from "../models/image";
 import Category from "../models/category";
+import deleteImages from "../utils/deleteImage";
 
 export default {
   async index(_req: Request, res: Response) {
@@ -79,7 +80,7 @@ export default {
 
     const product = productsRepository.create(data);
 
-    const teste = await productsRepository.save(product);
+    await productsRepository.save(product);
 
     return res.status(201).json(productView.render(product));
   },
@@ -161,6 +162,10 @@ export default {
     const product = await productsRepository.findOneOrFail(id, {
       relations: ["images"],
     });
+
+    const imagesNames = product.images.map((image) => image.path);
+
+    deleteImages(imagesNames);
 
     await productsRepository.remove(product);
 
