@@ -96,6 +96,7 @@ PUT /products
 | `price`       | `number` |
 | `quantity`    | `number` |
 | `category`    | `number` |
+| `image`       | `file`   |
 
 `Category need to exist`
 
@@ -138,6 +139,7 @@ PUT /products/:id
 | `price`       | `number` |
 | `quantity`    | `number` |
 | `category`    | `number` |
+| `image`       | `file`   |
 
 `Category need to exist`
 
