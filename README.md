@@ -267,4 +267,4 @@ DELETE /categorys/:id
 
 ## License
 
-MIT © Gu7z](https://github.com/Gu7z)
+MIT © [Gu7z](https://github.com/Gu7z)
