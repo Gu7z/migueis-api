@@ -242,6 +242,8 @@ PUT /categorys
 PUT /categorys/:id
 ```
 
+###### Input
+
 | Name   | Type     |
 | ------ | -------- |
 | `name` | `string` |
