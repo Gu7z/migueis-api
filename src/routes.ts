@@ -3,6 +3,7 @@ import multer from "multer";
 
 import uploadConfig from "./config/upload";
 import CategoryController from "./controllers/CategoryController";
+import OrderController from "./controllers/OrderController";
 import ProductsController from "./controllers/ProductsController";
 
 const routes = Router();
@@ -21,5 +22,12 @@ routes.get("/categorys/:id", CategoryController.show);
 routes.post("/categorys", CategoryController.create);
 routes.post("/categorys/:id", CategoryController.update);
 routes.delete("/categorys/:id", CategoryController.delete);
+
+// Orders API
+routes.get("/order", OrderController.index);
+routes.get("/order/:id", OrderController.show);
+routes.post("/order", OrderController.create);
+routes.post("/order/:id", OrderController.update);
+routes.delete("/order/:id", OrderController.delete);
 
 export default routes;
