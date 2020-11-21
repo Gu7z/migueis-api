@@ -141,6 +141,12 @@ export default {
     });
 
     const imagesRepository = getRepository(Images);
+
+    const imagesNames = product.images.map((image) => image.path);
+
+    deleteImages(imagesNames);
+
+    await imagesRepository.remove(product.images);
     const imagesFromDB = imagesRepository.create(images);
 
     product.name = name;
