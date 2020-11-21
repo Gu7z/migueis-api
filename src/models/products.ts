@@ -4,11 +4,11 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
-  ManyToOne,
   OneToOne,
 } from "typeorm";
 import Category from "./category";
 import Image from "./image";
+import Items from "./requestedItems";
 
 @Entity("products")
 export default class Products {
@@ -40,4 +40,10 @@ export default class Products {
     name: "product_id",
   })
   images: Image[];
+
+  @OneToMany(() => Items, (items) => items.product)
+  @JoinColumn({
+    name: "id",
+  })
+  items: Items;
 }
