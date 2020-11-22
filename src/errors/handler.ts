@@ -27,12 +27,6 @@ const deleteLastFile = () => {
 };
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
-  try {
-    deleteLastFile();
-  } catch (error) {
-    console.log(error);
-  }
-
   if (error instanceof ValidationError) {
     let errors: ValidationErrors = {};
 
