@@ -1,32 +1,11 @@
-import { ErrorRequestHandler, response } from "express";
+import { ErrorRequestHandler } from "express";
 import { ValidationError } from "yup";
-import path from "path";
-import fs from "fs";
 
 interface ValidationErrors {
   [key: string]: string[];
 }
 
-const deleteLastFile = () => {
-  const files = fs.readdirSync(path.join(__dirname, "..", "..", "uploads", ""));
-
-  // Remove Readme from list
-  files.pop();
-
-  if (!!files[files.length - 1]) {
-    fs.unlink(
-      path.join(__dirname, "..", "..", "uploads", files[files.length - 1]),
-      (err) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-      }
-    );
-  }
-};
-
-const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   if (error instanceof ValidationError) {
     let errors: ValidationErrors = {};
 

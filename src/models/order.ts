@@ -3,12 +3,8 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Products from "./products";
-import Items from "./requestedItems";
 import ItemsCounter from "./requestedItemsCounter";
 
 @Entity("orders")

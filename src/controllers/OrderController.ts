@@ -97,7 +97,6 @@ export default {
   async update(req: Request, res: Response) {
     const { id } = req.params;
     const products = req.body.items as ItemsRequest[];
-    const { description } = req.body;
 
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);

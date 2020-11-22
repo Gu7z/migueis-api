@@ -1,10 +1,4 @@
-import {
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Order from "./order";
 import Items from "./requestedItems";
 
