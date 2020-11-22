@@ -135,7 +135,7 @@ export default {
 
     await OrderRepository.save(order);
 
-    return res.status(201).json();
+    return res.status(204).json();
   },
 
   async delete(req: Request, res: Response) {
