@@ -10,6 +10,7 @@ A Migueis-API é uma API desenvolvida na matéria de Projeto Integrador 6 com a 
 
 - **[Products](#products)**
 - **[Categorys](#categorys)**
+- **[Orders](#orders)**
 
 #### Products
 
