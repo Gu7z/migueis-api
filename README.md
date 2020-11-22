@@ -269,6 +269,162 @@ DELETE /categorys/:id
 
 `204 No Response`
 
+#### Orders
+
+- [List All](#list-2)
+- [List One](#list-one-2)
+- [Add](#add-2)
+- [Update](#update-2)
+- [Delete](#delete-2)
+
+##### List
+
+```
+GET /order
+```
+
+###### Response
+
+```json
+[
+  {
+    "id": 1,
+    "value": 24.1,
+    "items": [
+      {
+        "id": 1,
+        "quantity": 1,
+        "description": "Com muito molho",
+        "product": {
+          "description": "É bom",
+          "id": 3,
+          "name": "Macarrão",
+          "price": 14.5
+        }
+      },
+      {
+        "id": 2,
+        "quantity": 2,
+        "description": "Com Gás",
+        "product": {
+          "description": "Geladinha",
+          "id": 4,
+          "name": "Agua mineral",
+          "price": 4.8
+        }
+      }
+    ]
+  }
+]
+```
+
+##### List One
+
+```
+GET /order/:id
+```
+
+###### Response
+
+```json
+{
+  "id": 1,
+  "value": 24.1,
+  "items": [
+    {
+      "id": 1,
+      "quantity": 1,
+      "description": "Com muito molho",
+      "product": {
+        "description": "É bom",
+        "id": 3,
+        "name": "Macarrão",
+        "price": 14.5
+      }
+    },
+    {
+      "id": 2,
+      "quantity": 2,
+      "description": "Com Gás",
+      "product": {
+        "description": "Geladinha",
+        "id": 4,
+        "name": "Agua mineral",
+        "price": 4.8
+      }
+    }
+  ]
+}
+```
+
+##### Add
+
+```
+PUT /order
+```
+
+###### Input
+
+```json
+{
+  "items": [
+    {
+      "productId": 3,
+      "quantity": 1,
+      "description": "Com muito molho"
+    },
+    {
+      "productId": 4,
+      "quantity": 2,
+      "description": "Com Gás"
+    }
+  ]
+}
+```
+
+###### Response
+
+`204 No Response`
+
+##### Update
+
+```
+PUT /order/:id
+```
+
+###### Input
+
+```json
+{
+  "items": [
+    {
+      "productId": 3,
+      "quantity": 1,
+      "description": "Com muito molho"
+    },
+    {
+      "productId": 4,
+      "quantity": 2,
+      "description": "Com Gás"
+    }
+  ]
+}
+```
+
+###### Response
+
+`204 No Response`
+
+##### Delete
+
+```
+DELETE /order/:id
+```
+
+###### Response
+
+`204 No Response`
+
 ## License
 
 MIT © [Gu7z](https://github.com/Gu7z)
