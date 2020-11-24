@@ -6,6 +6,7 @@ type formatedItemType = Omit<Items, "itemsCounter">;
 interface OrderToRender {
   id: number;
   value: number;
+  table: number;
   items: formatedItemType[];
 }
 
@@ -33,6 +34,7 @@ export default {
       return {
         id: order.id,
         value: order.value,
+        table: order.table,
         items: items.map(formatItem),
       };
     } else {
@@ -45,6 +47,7 @@ export default {
       const orderToRender = {
         id: order.id,
         value: order.value,
+        table: order.table,
         items: items[index].map(formatItem),
       };
 
