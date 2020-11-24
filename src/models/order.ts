@@ -15,6 +15,9 @@ export default class Order {
   @Column()
   value: number;
 
+  @Column()
+  table: number;
+
   @ManyToOne(() => ItemsCounter, (itemsCounter) => itemsCounter.id)
   @JoinColumn({ name: "items" })
   itemsCounter: number;
