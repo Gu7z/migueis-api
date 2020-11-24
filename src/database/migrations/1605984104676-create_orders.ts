@@ -24,7 +24,6 @@ export class createOrders1605984104676 implements MigrationInterface {
             name: "items",
             type: "number",
           },
-          { name: "table", type: "integer" },
         ],
         foreignKeys: [
           {
