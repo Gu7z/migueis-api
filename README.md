@@ -291,6 +291,7 @@ GET /order
   {
     "id": 1,
     "value": 24.1,
+    "table": 5,
     "items": [
       {
         "id": 1,
@@ -331,6 +332,7 @@ GET /order/:id
 {
   "id": 1,
   "value": 24.1,
+  "table": 5,
   "items": [
     {
       "id": 1,
@@ -379,7 +381,8 @@ PUT /order
       "quantity": 2,
       "description": "Com Gás"
     }
-  ]
+  ],
+  "table": 5
 }
 ```
 
@@ -408,7 +411,8 @@ PUT /order/:id
       "quantity": 2,
       "description": "Com Gás"
     }
-  ]
+  ],
+  "table": 5
 }
 ```
 
