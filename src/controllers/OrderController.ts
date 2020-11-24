@@ -54,7 +54,7 @@ export default {
 
   async create(req: Request, res: Response) {
     const products = req.body.items as ItemsRequest[];
-    const { description } = req.body;
+    const { description, table } = req.body;
 
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);
@@ -87,7 +87,10 @@ export default {
     const order = OrderRepository.create({
       itemsCounter: itemCounter.id,
       value,
+      table,
     });
+
+    console.log(order);
 
     await OrderRepository.save(order);
 
@@ -97,6 +100,7 @@ export default {
   async update(req: Request, res: Response) {
     const { id } = req.params;
     const products = req.body.items as ItemsRequest[];
+    const { table } = req.body;
 
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);
@@ -131,6 +135,7 @@ export default {
 
     order.itemsCounter = itemCounter.id;
     order.value = value;
+    order.table = table;
 
     await OrderRepository.save(order);
 
