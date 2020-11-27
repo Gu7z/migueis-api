@@ -5,6 +5,7 @@ import Products from "../models/products";
 import ItemsCounter from "../models/requestedItemsCounter";
 import { getRepository } from "typeorm";
 import ordersView from "../views/ordersView";
+import User from "../models/user";
 
 interface ItemsRequest {
   productId: number;
@@ -13,12 +14,15 @@ interface ItemsRequest {
 }
 
 export default {
-  async index(_req: Request, res: Response) {
+  async index(req: Request, res: Response) {
+    const user = req.session.user as User;
+
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);
 
     const orders = await OrderRepository.find({
-      relations: ["itemsCounter"],
+      where: { user: user.id },
+      relations: ["itemsCounter", "user"],
     });
 
     let items: Items[][] = [];
@@ -35,6 +39,8 @@ export default {
   },
 
   async show(req: Request, res: Response) {
+    const user = req.session.user as User;
+
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);
 
@@ -53,8 +59,10 @@ export default {
   },
 
   async create(req: Request, res: Response) {
+    const user = req.session.user as User;
+
     const products = req.body.items as ItemsRequest[];
-    const { description, table } = req.body;
+    const { table } = req.body;
 
     const OrderRepository = getRepository(Order);
     const ItemsRepository = getRepository(Items);
@@ -69,8 +77,6 @@ export default {
       const productData = await ProductRepository.findOneOrFail(
         product.productId
       );
-
-      console.log(description);
 
       const item = ItemsRepository.create({
         itemsCounter: itemCounter.id,
@@ -88,9 +94,8 @@ export default {
       itemsCounter: itemCounter.id,
       value,
       table,
+      user,
     });
-
-    console.log(order);
 
     await OrderRepository.save(order);
 
@@ -143,10 +148,13 @@ export default {
   },
 
   async delete(req: Request, res: Response) {
+    const user = req.session.user as User;
     const { id } = req.params;
 
     const orderRepository = getRepository(Order);
-    const order = await orderRepository.findOneOrFail(id);
+    const order = await orderRepository.findOneOrFail(id, {
+      where: { user: user.id },
+    });
 
     await orderRepository.remove(order);
 
