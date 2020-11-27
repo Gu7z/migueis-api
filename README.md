@@ -25,7 +25,7 @@ Apenas um admin consegue cadastrar outro admin. Para fazermos isso, no momento d
 
 #### Login
 
-Para logar o Front deve mandar um header com authenticação _"Basic"_ enviando o email e o hash da senha.
+Para logar, o Front deve mandar um header com authenticação _"Basic"_ enviando o email e o hash da senha.
 
 #### Auth
 
