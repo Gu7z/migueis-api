@@ -48,14 +48,19 @@ const headers = {
 
 ## Endpoints
 
+_Admin Auth_
+
 - **[Products](#products)**
 - **[Categorys](#categorys)**
 - **[Orders](#orders)**
+
+_User Auth_
+
 - **[User](#user-1)**
 
 #### Products
 
-_Authenticação Necessaria_
+_Autenticação Necessaria_
 **[Header Generation](#header-generation)**
 
 - [List All](#list)
@@ -224,7 +229,7 @@ DELETE /products/:id
 
 #### Categorys
 
-_Authenticação Necessaria_
+_Autenticação Necessaria_
 **[Header Generation](#header-generation)**
 
 - [List All](#list-1)
@@ -319,7 +324,7 @@ DELETE /categorys/:id
 
 #### Orders
 
-_Authenticação Necessaria_
+_Autenticação Necessaria_
 **[Header Generation](#header-generation)**
 
 - [List All](#list-2)
@@ -523,7 +528,7 @@ const headers = {
 
 ##### Register Admin
 
-_Authenticação Necessaria_
+_Autenticação Necessaria_
 **[Header Generation](#header-generation)**
 
 ```
