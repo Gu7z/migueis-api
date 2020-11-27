@@ -6,13 +6,57 @@
 
 A Migueis-API é uma API desenvolvida na matéria de Projeto Integrador 6 com a finalidade de complementar o sistema desenvolvido para o restaurante da rede Migueis.
 
+## Fluxos
+
+- **[Login/Registro de Usuários](#user)**
+- **[Header Generation](#header-generation)**
+
+### User
+
+#### Registro
+
+Para registrar um usuário, o trabalho de criar a chave privada e chave publica é do Front-End. O Back apenas armazena essas informações. O Front deve encriptar a chave privada com a senha pura do usuário e para evitar que alguem no meio do caminho pegue essa senha pura, o Front deve hashear essa senha antes de enviar. No Back pegamos esse hash e fazemos o encrypt com o bcrypt e então guardamos a senha no banco.
+
+#### Registro de Admin
+
+_O admin tem todas as caracteristicas de um usuário normal_
+
+Apenas um admin consegue cadastrar outro admin. Para fazermos isso, no momento de implantação sistema, deve ser colocado um admin generico no banco apenas para criar os outros e então esse admin deve ser <strong>REMOVIDO</strong>.
+
+#### Login
+
+Para logar o Front deve mandar um header com authenticação _"Basic"_ enviando o email e o hash da senha.
+
+#### Auth
+
+Para fazer as requisições que precisam de auth o front deve criar um jwt com a chave privada do user e mandar no header:
+
+```js
+Authorization: `Bearer ${jwt}`,
+'X-User-Email': userEmail
+```
+
+##### Header generation
+
+```js
+const token = jwt.sign({ email }, privateKey, { algorithm: "RS256" });
+const headers = {
+  Authorization: `Bearer ${token}`,
+  "X-User-Email": email,
+};
+```
+
 ## Endpoints
 
 - **[Products](#products)**
 - **[Categorys](#categorys)**
 - **[Orders](#orders)**
+- **[User](#user-1)**
 
 #### Products
+
+_Authenticação Necessaria_
+**[Header Generation](#header-generation)**
 
 - [List All](#list)
 - [List One](#list-one)
@@ -180,6 +224,9 @@ DELETE /products/:id
 
 #### Categorys
 
+_Authenticação Necessaria_
+**[Header Generation](#header-generation)**
+
 - [List All](#list-1)
 - [List One](#list-one-1)
 - [Add](#add-1)
@@ -271,6 +318,9 @@ DELETE /categorys/:id
 `204 No Response`
 
 #### Orders
+
+_Authenticação Necessaria_
+**[Header Generation](#header-generation)**
 
 - [List All](#list-2)
 - [List One](#list-one-2)
@@ -429,6 +479,102 @@ DELETE /order/:id
 ###### Response
 
 `204 No Response`
+
+#### User
+
+- [Register](#register)
+- [Register Admin](#register-admin)
+- [Login / Auth](#login-1)
+
+##### Register
+
+```
+Post /register
+```
+
+###### Input
+
+```json
+{
+  "name": "user-batata-${randomNumber}",
+  "encryptedPrivateKey": "${encryptedPrivateKey}",
+  "publicKey": "${publicKey}"
+}
+```
+
+Header generation:
+
+```js
+const headers = {
+  Authorization: `Basic ${btoa("user:senhaHasheada")}`,
+};
+```
+
+###### Response
+
+```json
+{
+  "userId": 0,
+  "email": "teste@teste.com",
+  "encryptedPrivateKey": "${encryptedPrivateKey}",
+  "publicKey": "${publicKey}"
+}
+```
+
+##### Register Admin
+
+_Authenticação Necessaria_
+**[Header Generation](#header-generation)**
+
+```
+Post /registerAdmin
+```
+
+###### Input
+
+```json
+{
+  "name": "user-batata-${randomNumber}",
+  "encryptedPrivateKey": "${encryptedPrivateKey}",
+  "publicKey": "${publicKey}"
+}
+```
+
+###### Response
+
+```json
+{
+  "userId": 0,
+  "email": "teste@teste.com",
+  "encryptedPrivateKey": "${encryptedPrivateKey}",
+  "publicKey": "${publicKey}"
+}
+```
+
+##### Login
+
+```
+GET /login
+```
+
+Header generation:
+
+```js
+const headers = {
+  Authorization: `Basic ${btoa("user:senhaHasheada")}`,
+};
+```
+
+###### Response
+
+```json
+{
+  "userId": 0,
+  "email": "teste@teste.com",
+  "encryptedPrivateKey": "${encryptedPrivateKey}",
+  "publicKey": "${publicKey}"
+}
+```
 
 ## License
 
