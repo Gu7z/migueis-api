@@ -13,8 +13,8 @@ const routes = Router();
 const upload = multer(uploadConfig);
 
 // Products API
-routes.get("/products", auth, adminAuth, ProductsController.index);
-routes.get("/products/:id", auth, adminAuth, ProductsController.show);
+routes.get("/products",  ProductsController.index);
+routes.get("/products/:id",  ProductsController.show);
 routes.post(
   "/products",
   auth,
@@ -32,8 +32,8 @@ routes.post(
 routes.delete("/products/:id", auth, adminAuth, ProductsController.delete);
 
 // Categorys API
-routes.get("/categorys", auth, adminAuth, CategoryController.index);
-routes.get("/categorys/:id", auth, adminAuth, CategoryController.show);
+routes.get("/categorys", CategoryController.index);
+routes.get("/categorys/:id", CategoryController.show);
 routes.post("/categorys", auth, adminAuth, CategoryController.create);
 routes.post("/categorys/:id", auth, adminAuth, CategoryController.update);
 routes.delete("/categorys/:id", auth, adminAuth, CategoryController.delete);
